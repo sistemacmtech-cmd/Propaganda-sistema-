@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carlamitertech - Atendimento e Serviços</title>
+    <title>Carlamitertech - Apresentação</title>
     <style>
         * {
             margin: 0;
@@ -37,7 +37,6 @@
             position: relative;
         }
 
-        /* Marca da empresa */
         .brand-header {
             font-size: 0.85rem;
             color: #8e8e93;
@@ -47,7 +46,6 @@
             margin-bottom: 20px;
         }
 
-        /* Balão de fala */
         .speech-bubble {
             position: relative;
             background: #25252e;
@@ -94,7 +92,6 @@
             line-height: 1.5;
         }
 
-        /* Container da Mascote */
         .mascot-container {
             position: relative;
             width: 100%;
@@ -110,9 +107,35 @@
             max-height: 350px;
             object-fit: contain;
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
+            transition: transform 0.2s ease;
         }
 
-        /* Ações e Links */
+        .speaking .mascot-img {
+            animation: talkMotion 0.4s ease-in-out infinite alternate;
+        }
+
+        .btn-speak {
+            width: 100%;
+            padding: 12px;
+            background: #3a3a48;
+            color: #ffffff;
+            border: 1px solid #5a5a6e;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .btn-speak:hover {
+            background: #4a4a5e;
+        }
+
         .action-area {
             width: 100%;
             display: flex;
@@ -174,6 +197,11 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-6px); }
         }
+
+        @keyframes talkMotion {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-4px) scale(1.02); }
+        }
     </style>
 </head>
 <body>
@@ -181,17 +209,18 @@
     <div class="card-container">
         <div class="brand-header">Carlamitertech</div>
 
-        <!-- Balão de fala com a mensagem solicitada -->
         <div class="speech-bubble">
-            <h2>Você já conhece o nosso serviço?<br>Siga nossa página @carlamitertech e saiba mais.</h2>
+            <h2 id="speech-text">Você já conhece o nosso serviço?<br>Siga nossa página @carlamitertech e saiba mais.</h2>
         </div>
 
-        <!-- Imagem da Boneca Mascote -->
-        <div class="mascot-container">
+        <div class="mascot-container" id="mascot-box">
             <img class="mascot-img" src="1000385669.jpg" alt="Mascote Carlamitertech">
         </div>
 
-        <!-- Área de Redes Sociais e Contato -->
+        <button class="btn-speak" onclick="falarMensagem()">
+            🔊 Ouvir a mensagem
+        </button>
+
         <div class="action-area">
             <div class="instagram-box">
                 <p>Acesse nosso perfil:</p>
@@ -206,5 +235,37 @@
         </div>
     </div>
 
+    <script>
+        function falarMensagem() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+
+                const texto = "Você já conhece o nosso serviço? Siga nossa página @carlamitertech e saiba mais.";
+                const utterance = new SpeechSynthesisUtterance(texto);
+                utterance.lang = 'pt-BR';
+                utterance.rate = 1.0;
+
+                const mascotBox = document.getElementById('mascot-box');
+
+                utterance.onstart = function () {
+                    mascotBox.classList.add('speaking');
+                };
+
+                utterance.onend = function () {
+                    mascotBox.classList.remove('speaking');
+                };
+
+                utterance.onerror = function () {
+                    mascotBox.classList.remove('speaking');
+                };
+
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("O seu navegador não suporta a funcionalidade de voz.");
+            }
+        }
+    </script>
+
 </body>
 </html>
+
