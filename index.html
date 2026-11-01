@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carlamitertech - Apresentação</title>
+    <title>Carlamitertech - Automação Digital</title>
     <style>
         * {
             margin: 0;
@@ -13,23 +13,24 @@
         }
 
         body {
-            background-color: #0f0f12;
+            background-color: #0d0d11;
             color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
         }
 
         .card-container {
             width: 100%;
             max-width: 420px;
-            background: #18181c;
+            background: #16161a;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            border: 1px solid #2a2a32;
+            box-shadow: 0 20px 50px rgba(0, 255, 170, 0.1);
+            border: 1px solid #282832;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -39,23 +40,25 @@
 
         .brand-header {
             font-size: 0.85rem;
-            color: #8e8e93;
+            color: #38ef7d;
             letter-spacing: 2px;
             text-transform: uppercase;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(56, 239, 125, 0.4);
         }
 
+        /* Balão de fala */
         .speech-bubble {
             position: relative;
-            background: #25252e;
-            border: 2px solid #3a3a48;
+            background: #22222b;
+            border: 2px solid #38ef7d;
             border-radius: 18px;
             padding: 16px 20px;
             margin-bottom: 25px;
             text-align: center;
             width: 100%;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
             animation: float 3s ease-in-out infinite;
         }
 
@@ -67,20 +70,7 @@
             transform: translateX(-50%);
             border-width: 12px 10px 0;
             border-style: solid;
-            border-color: #25252e transparent;
-            display: block;
-            width: 0;
-        }
-
-        .speech-bubble::before {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 13px 11px 0;
-            border-style: solid;
-            border-color: #3a3a48 transparent;
+            border-color: #22222b transparent;
             display: block;
             width: 0;
         }
@@ -92,37 +82,108 @@
             line-height: 1.5;
         }
 
-        .mascot-container {
+        /* Container da Mascote Animada */
+        .mascot-stage {
             position: relative;
             width: 100%;
-            max-width: 240px;
+            max-width: 250px;
+            height: 340px;
             display: flex;
             justify-content: center;
+            align-items: center;
             margin-bottom: 25px;
         }
 
-        .mascot-wrapper {
+        /* Efeito de Papel abrindo para Digital */
+        .paper-cutout {
             position: relative;
             width: 100%;
-            display: flex;
-            justify-content: center;
+            height: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            animation: paperToDigital 2s ease-out forwards;
         }
 
         .mascot-img {
             width: 100%;
-            height: auto;
-            max-height: 350px;
+            height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
-            animation: eyeBlink 4s infinite;
-            transform-origin: center bottom;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+            transform-origin: 50% 90%;
         }
 
-        /* Animação simulando movimento de fala (boca/cabeça) e expressão */
+        /* Efeitos digitais de automação sobrepostos */
+        .circuit-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(56, 239, 125, 0.15) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Articulação e Movimentos CSS */
         .speaking .mascot-img {
-            animation: talkAndBlink 0.25s infinite alternate;
+            animation: robotSpeak 0.2s ease-in-out infinite alternate;
         }
 
+        .speaking .circuit-overlay {
+            opacity: 1;
+            animation: pulseGlow 1s ease-in-out infinite alternate;
+        }
+
+        /* Elementos da Boca e Olhos simulados por CSS em tempo real */
+        .mouth-animator {
+            position: absolute;
+            top: 24.5%;
+            left: 45.5%;
+            width: 9%;
+            height: 3.5%;
+            background: #ab1f24;
+            border-radius: 0 0 15px 15px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .speaking .mouth-animator {
+            opacity: 1;
+            animation: mouthTalk 0.15s ease-in-out infinite alternate;
+        }
+
+        .eye-blink-layer {
+            position: absolute;
+            top: 19%;
+            left: 31%;
+            width: 38%;
+            height: 5%;
+            background: transparent;
+            pointer-events: none;
+        }
+
+        .eye-blink-layer::before, .eye-blink-layer::after {
+            content: '';
+            position: absolute;
+            width: 22%;
+            height: 100%;
+            background: #2bb7eb;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .eye-blink-layer::before { left: 10%; }
+        .eye-blink-layer::after { right: 10%; }
+
+        .blinking .eye-blink-layer::before, 
+        .blinking .eye-blink-layer::after {
+            opacity: 1;
+            animation: blink 0.15s ease-in-out 2 alternate;
+        }
+
+        /* Links e Chamadas */
         .action-area {
             width: 100%;
             display: flex;
@@ -131,8 +192,8 @@
         }
 
         .instagram-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(56, 239, 125, 0.2);
             border-radius: 14px;
             padding: 16px;
             text-align: center;
@@ -157,36 +218,58 @@
             transform: scale(1.05);
         }
 
+        /* Keyframes das Animações */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-6px); }
         }
 
-        /* Animação de piscar os olhos e leve movimento */
-        @keyframes eyeBlink {
-            0%, 90%, 100% { opacity: 1; transform: scaleY(1); }
-            95% { opacity: 0.92; transform: scaleY(0.98); }
+        @keyframes paperToDigital {
+            0% { 
+                clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+                filter: grayscale(1) contrast(1.5);
+            }
+            50% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                filter: grayscale(0.5) contrast(1.2);
+            }
+            100% { 
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                filter: grayscale(0) contrast(1);
+            }
         }
 
-        /* Animação combinada de fala e piscada */
-        @keyframes talkAndBlink {
-            0% { transform: scale(1) translateY(0); }
-            100% { transform: scale(1.03, 0.97) translateY(-2px); }
+        @keyframes robotSpeak {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.02, 0.98) rotate(0.8deg); }
+        }
+
+        @keyframes mouthTalk {
+            0% { transform: scaleY(0.3); }
+            100% { transform: scaleY(1.3); }
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.2; }
+            100% { opacity: 0.6; }
         }
     </style>
 </head>
 <body>
 
     <div class="card-container">
-        <div class="brand-header">Carlamitertech</div>
+        <div class="brand-header">Carlamitertech • Automação</div>
 
         <div class="speech-bubble">
             <h2>Você já conhece o nosso serviço?<br>Clique no link da Bio e saiba mais!</h2>
         </div>
 
-        <div class="mascot-container" id="mascot-box">
-            <div class="mascot-wrapper">
-                <img class="mascot-img" src="1000385669.jpg" alt="Mascote Carlamitertech">
+        <div class="mascot-stage" id="mascot-stage">
+            <div class="paper-cutout">
+                <img class="mascot-img" src="1000385669.jpg" alt="Mascote Carlamitertech">[span_1](start_span)[span_1](end_span)
+                <div class="circuit-overlay"></div>
+                <div class="mouth-animator"></div>
+                <div class="eye-blink-layer"></div>
             </div>
         </div>
 
@@ -201,7 +284,7 @@
     </div>
 
     <script>
-        function iniciarFala() {
+        function iniciarAutomacaoEFala() {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
 
@@ -212,33 +295,40 @@
                 utterance.rate = 1.05;
                 utterance.pitch = 1.1;
 
-                const mascotBox = document.getElementById('mascot-box');
+                const stage = document.getElementById('mascot-stage');
 
                 utterance.onstart = function () {
-                    mascotBox.classList.add('speaking');
+                    stage.classList.add('speaking');
                 };
 
                 utterance.onend = function () {
-                    mascotBox.classList.remove('speaking');
+                    stage.classList.remove('speaking');
                 };
 
                 utterance.onerror = function () {
-                    mascotBox.classList.remove('speaking');
+                    stage.classList.remove('speaking');
                 };
 
                 window.speechSynthesis.speak(utterance);
             }
         }
 
-        // Tenta iniciar a fala assim que a página carrega
+        // Loop automático para piscar os olhos
+        setInterval(() => {
+            const stage = document.getElementById('mascot-stage');
+            stage.classList.add('blinking');
+            setTimeout(() => stage.classList.remove('blinking'), 300);
+        }, 3500);
+
+        // Disparo automático ao carregar a página
         window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(iniciarFala, 500);
+            setTimeout(iniciarAutomacaoEFala, 600);
         });
 
-        // Caso o navegador bloqueie áudio automático sem interação prévia
+        // Garantia de disparo em dispositivos móveis
         document.body.addEventListener('click', () => {
             if (!window.speechSynthesis.speaking) {
-                iniciarFala();
+                iniciarAutomacaoEFala();
             }
         }, { once: true });
     </script>
