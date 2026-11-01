@@ -66,7 +66,7 @@
             line-height: 1.5;
         }
 
-        /* Container da Imagem da Mascote */
+        /* Container da Imagem da Mascote Ajustado para não cortar */
         .mascot-box {
             position: relative;
             width: 100%;
@@ -87,26 +87,7 @@
             filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.4));
         }
 
-        /* Botão para ativar a voz caso o navegador bloqueie */
-        .btn-audio {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #38ef7d, #11998e);
-            color: #0f0f12;
-            border: none;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin-bottom: 20px;
-            transition: opacity 0.2s ease;
-            box-shadow: 0 4px 15px rgba(56, 239, 125, 0.3);
-        }
-
-        .btn-audio:hover {
-            opacity: 0.9;
-        }
-
+        /* Área de Links */
         .action-area {
             width: 100%;
         }
@@ -148,15 +129,10 @@
             <h2>Você já conhece o nosso serviço?<br>Clique no link da Bio e saiba mais!</h2>
         </div>
 
-        <!-- Imagem estática e perfeita da mascote -->
+        <!-- Imagem estática e completa da mascote -->
         <div class="mascot-box">
             <img src="1000385669.jpg" alt="Mascote Carlamitertech">[span_1](start_span)[span_1](end_span)
         </div>
-
-        <!-- Botão interativo para reproduzir a voz com som garantido -->
-        <button class="btn-audio" onclick="tocarVoz()">
-            🔊 Ouvir a Mascote Falando
-        </button>
 
         <div class="action-area">
             <div class="instagram-box">
@@ -177,19 +153,24 @@
                 const utterance = new SpeechSynthesisUtterance(texto);
                 
                 utterance.lang = 'pt-BR';
-                utterance.rate = 1.05; // Velocidade natural
-                utterance.pitch = 1.1;  // Tom amigável
+                utterance.rate = 1.05; 
+                utterance.pitch = 1.1; 
 
                 window.speechSynthesis.speak(utterance);
-            } else {
-                alert("Seu navegador não suporta a reprodução de voz.");
             }
         }
 
-        // Tenta falar automaticamente ao abrir (caso o navegador permita)
+        // Tenta falar automaticamente assim que a página abre
         window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(tocarVoz, 800);
+            setTimeout(tocarVoz, 600);
         });
+
+        // Caso o navegador bloqueie o som automático, a voz dispara no primeiro toque na tela
+        document.body.addEventListener('click', () => {
+            if (!window.speechSynthesis.speaking) {
+                tocarVoz();
+            }
+        }, { once: true });
     </script>
 
 </body>
