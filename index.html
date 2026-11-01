@@ -86,7 +86,7 @@
         }
 
         .speech-bubble h2 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #ffffff;
             font-weight: 600;
             line-height: 1.5;
@@ -210,11 +210,11 @@
         <div class="brand-header">Carlamitertech</div>
 
         <div class="speech-bubble">
-            <h2 id="speech-text">Você já conhece o nosso serviço?<br>Siga nossa página @carlamitertech e saiba mais.</h2>
+            <h2 id="speech-text">Você já conhece o nosso serviço?<br>Clique no link da Bio e saiba mais!</h2>
         </div>
 
         <div class="mascot-container" id="mascot-box">
-            <img class="mascot-img" src="1000385669.jpg" alt="Mascote Carlamitertech">
+            <img class="mascot-img" src="1000385669.jpg" alt="Mascote Carlamitertech[span_0](start_span)[span_0](end_span)">
         </div>
 
         <button class="btn-speak" onclick="falarMensagem()">
@@ -223,7 +223,7 @@
 
         <div class="action-area">
             <div class="instagram-box">
-                <p>Acesse nosso perfil:</p>
+                <p>Siga nossa página:</p>
                 <a href="https://www.instagram.com/carlamitertech" target="_blank" class="instagram-link">
                     @carlamitertech
                 </a>
@@ -240,10 +240,13 @@
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
 
-                const texto = "Você já conhece o nosso serviço? Siga nossa página @carlamitertech e saiba mais.";
+                // Texto otimizado com pontuação para dar mais ênfase na narração
+                const texto = "Você já conhece o nosso serviço? Clique no link da Bio e saiba mais!";
                 const utterance = new SpeechSynthesisUtterance(texto);
+                
                 utterance.lang = 'pt-BR';
-                utterance.rate = 1.0;
+                utterance.rate = 1.05; // Velocidade ligeiramente dinâmica
+                utterance.pitch = 1.1;  // Tom de voz um pouco mais amigável/jovem
 
                 const mascotBox = document.getElementById('mascot-box');
 
