@@ -48,7 +48,7 @@
             text-shadow: 0 0 10px rgba(56, 239, 125, 0.4);
         }
 
-        /* Balão de fala */
+        /* Balão de fala moderno */
         .speech-bubble {
             position: relative;
             background: #22222b;
@@ -82,7 +82,7 @@
             line-height: 1.5;
         }
 
-        /* Container da Mascote Animada */
+        /* Container da Mascote */
         .mascot-stage {
             position: relative;
             width: 100%;
@@ -94,14 +94,14 @@
             margin-bottom: 25px;
         }
 
-        /* Efeito de Papel abrindo para Digital */
-        .paper-cutout {
+        .mascot-wrapper {
             position: relative;
             width: 100%;
             height: 100%;
-            border-radius: 16px;
-            overflow: hidden;
-            animation: paperToDigital 2s ease-out forwards;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: paperToDigital 1.5s ease-out forwards;
         }
 
         .mascot-img {
@@ -109,81 +109,43 @@
             height: 100%;
             object-fit: contain;
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-            transform-origin: 50% 90%;
+            transform-origin: center bottom;
+            transition: filter 0.3s ease;
         }
 
-        /* Efeitos digitais de automação sobrepostos */
-        .circuit-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background: radial-gradient(circle, rgba(56, 239, 125, 0.15) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        /* Articulação e Movimentos CSS */
+        /* Efeito de brilho de automação digital ao falar */
         .speaking .mascot-img {
-            animation: robotSpeak 0.2s ease-in-out infinite alternate;
+            animation: robotSpeak 0.22s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 20px rgba(56, 239, 125, 0.6)) brightness(1.05);
         }
 
-        .speaking .circuit-overlay {
-            opacity: 1;
-            animation: pulseGlow 1s ease-in-out infinite alternate;
+        /* Animação suave flutuante do card */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
-        /* Elementos da Boca e Olhos simulados por CSS em tempo real */
-        .mouth-animator {
-            position: absolute;
-            top: 24.5%;
-            left: 45.5%;
-            width: 9%;
-            height: 3.5%;
-            background: #ab1f24;
-            border-radius: 0 0 15px 15px;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s;
+        /* Transição inicial simulando ativação de sistema */
+        @keyframes paperToDigital {
+            0% { 
+                opacity: 0;
+                transform: scale(0.9);
+                filter: grayscale(0.8);
+            }
+            100% { 
+                opacity: 1;
+                transform: scale(1);
+                filter: grayscale(0);
+            }
         }
 
-        .speaking .mouth-animator {
-            opacity: 1;
-            animation: mouthTalk 0.15s ease-in-out infinite alternate;
+        /* Movimento natural de fala da mascote inteira */
+        @keyframes robotSpeak {
+            0% { transform: scale(1) translateY(0) rotate(0deg); }
+            100% { transform: scale(1.03, 0.97) translateY(-3px) rotate(0.6deg); }
         }
 
-        .eye-blink-layer {
-            position: absolute;
-            top: 19%;
-            left: 31%;
-            width: 38%;
-            height: 5%;
-            background: transparent;
-            pointer-events: none;
-        }
-
-        .eye-blink-layer::before, .eye-blink-layer::after {
-            content: '';
-            position: absolute;
-            width: 22%;
-            height: 100%;
-            background: #2bb7eb;
-            border-radius: 50%;
-            opacity: 0;
-        }
-
-        .eye-blink-layer::before { left: 10%; }
-        .eye-blink-layer::after { right: 10%; }
-
-        .blinking .eye-blink-layer::before, 
-        .blinking .eye-blink-layer::after {
-            opacity: 1;
-            animation: blink 0.15s ease-in-out 2 alternate;
-        }
-
-        /* Links e Chamadas */
+        /* Área de Links */
         .action-area {
             width: 100%;
             display: flex;
@@ -217,42 +179,6 @@
         .instagram-link:hover {
             transform: scale(1.05);
         }
-
-        /* Keyframes das Animações */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
-        @keyframes paperToDigital {
-            0% { 
-                clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
-                filter: grayscale(1) contrast(1.5);
-            }
-            50% {
-                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-                filter: grayscale(0.5) contrast(1.2);
-            }
-            100% { 
-                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-                filter: grayscale(0) contrast(1);
-            }
-        }
-
-        @keyframes robotSpeak {
-            0% { transform: scale(1) rotate(0deg); }
-            100% { transform: scale(1.02, 0.98) rotate(0.8deg); }
-        }
-
-        @keyframes mouthTalk {
-            0% { transform: scaleY(0.3); }
-            100% { transform: scaleY(1.3); }
-        }
-
-        @keyframes pulseGlow {
-            0% { opacity: 0.2; }
-            100% { opacity: 0.6; }
-        }
     </style>
 </head>
 <body>
@@ -265,11 +191,8 @@
         </div>
 
         <div class="mascot-stage" id="mascot-stage">
-            <div class="paper-cutout">
+            <div class="mascot-wrapper">
                 <img class="mascot-img" src="1000385669.jpg" alt="Mascote Carlamitertech">[span_1](start_span)[span_1](end_span)
-                <div class="circuit-overlay"></div>
-                <div class="mouth-animator"></div>
-                <div class="eye-blink-layer"></div>
             </div>
         </div>
 
@@ -313,19 +236,12 @@
             }
         }
 
-        // Loop automático para piscar os olhos
-        setInterval(() => {
-            const stage = document.getElementById('mascot-stage');
-            stage.classList.add('blinking');
-            setTimeout(() => stage.classList.remove('blinking'), 300);
-        }, 3500);
-
         // Disparo automático ao carregar a página
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(iniciarAutomacaoEFala, 600);
         });
 
-        // Garantia de disparo em dispositivos móveis
+        // Garantia de disparo em dispositivos móveis caso o navegador restrinja autoplay
         document.body.addEventListener('click', () => {
             if (!window.speechSynthesis.speaking) {
                 iniciarAutomacaoEFala();
