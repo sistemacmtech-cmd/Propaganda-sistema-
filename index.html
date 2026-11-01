@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlamitertech - Atendimento e Serviços</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f0f12;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card-container {
+            width: 100%;
+            max-width: 420px;
+            background: #18181c;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            border: 1px solid #2a2a32;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px;
+            position: relative;
+        }
+
+        /* Marca da empresa */
+        .brand-header {
+            font-size: 0.85rem;
+            color: #8e8e93;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Balão de fala */
+        .speech-bubble {
+            position: relative;
+            background: #25252e;
+            border: 2px solid #3a3a48;
+            border-radius: 18px;
+            padding: 16px 20px;
+            margin-bottom: 25px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 12px 10px 0;
+            border-style: solid;
+            border-color: #25252e transparent;
+            display: block;
+            width: 0;
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 13px 11px 0;
+            border-style: solid;
+            border-color: #3a3a48 transparent;
+            display: block;
+            width: 0;
+        }
+
+        .speech-bubble h2 {
+            font-size: 1.1rem;
+            color: #ffffff;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        /* Container da Mascote */
+        .mascot-container {
+            position: relative;
+            width: 100%;
+            max-width: 240px;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .mascot-img {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
+        }
+
+        /* Ações e Links */
+        .action-area {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .instagram-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 14px;
+            text-align: center;
+        }
+
+        .instagram-box p {
+            font-size: 0.9rem;
+            color: #cccccc;
+            margin-bottom: 6px;
+        }
+
+        .instagram-link {
+            display: inline-block;
+            color: #38ef7d;
+            font-weight: bold;
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .instagram-link:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-whatsapp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .btn-whatsapp:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <div class="brand-header">Carlamitertech</div>
+
+        <!-- Balão de fala com a mensagem solicitada -->
+        <div class="speech-bubble">
+            <h2>Você já conhece o nosso serviço?<br>Siga nossa página @carlamitertech e saiba mais.</h2>
+        </div>
+
+        <!-- Imagem da Boneca Mascote -->
+        <div class="mascot-container">
+            <img class="mascot-img" src="1000385669.jpg" alt="Mascote Carlamitertech">
+        </div>
+
+        <!-- Área de Redes Sociais e Contato -->
+        <div class="action-area">
+            <div class="instagram-box">
+                <p>Acesse nosso perfil:</p>
+                <a href="https://www.instagram.com/carlamitertech" target="_blank" class="instagram-link">
+                    @carlamitertech
+                </a>
+            </div>
+
+            <a href="https://wa.me/553175644571" target="_blank" class="btn-whatsapp">
+                Falar pelo WhatsApp
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
